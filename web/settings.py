@@ -11,9 +11,6 @@ ALLOWED_HOSTS = ['*']
 
 SECURE_SSL_REDIRECT = False
 
-LINE_CHANNEL_SECRET = '37881fdc69b3463dc659f195115d64d4'
-LINE_CHANNEL_ACCESS_TOKEN = 'vsYyQ2Xanjuf7BZ5YSOFZ2zg7tJckjC6BygQzTYrDi/rxFicCUSf8RN11jyvvdbghvHkdZpPnGJJNBQQu3K2q7vKtVSjIYqeKWoQZP7n2YBs+/VNuNLtUunp1HyT6Zclz8byWoKHBr3Ke31CXdCzLwdB04t89/1O/w1cDnyilFU='
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -100,5 +97,6 @@ USE_TZ = True
 
 STATIC_URL='static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
