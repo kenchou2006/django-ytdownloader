@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Video Downloader</title>
+    <link rel="shortcut icon" href="https://www.youtube.com/s/desktop/2e540ce9/img/favicon.ico" />
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1186758112384964"
+        crossorigin="anonymous"></script>
+
+<h1>YouTube Video Downloader</h1>
+<form method="post" action="{% url 'ytdownload' %}">
+    {% csrf_token %}
+    <label for="video_url">Video URL:</label>
+    <input type="text" id="video_url" name="video_url" value="{{ video_url }}">
+    <button type="submit">Get</button>
+</form>
+
+{% if video_info %}
+    <h2>{{ video_info.video_title }}</h2>
+    <p>Views: {{ video_info.views }}</p>
+    <p>Publish Date: {{ video_info.publish_date|date:"Y/m/d" }}</p>
+    <p>Thumbnail: <a href="{{ video_info.thumbnail_url }}" download>Download</a></p>
+
+    <h3>Video Streams:</h3>
+    <ul>
+        {% for stream in video_info.streams_info %}
+            <li>
+                Type: {{ stream.type }},
+                {% if stream.resolution %} Resolution: {{ stream.resolution }},{% endif %}
+                {% if stream.quality %} Quality: {{ stream.quality }},{% endif %}
+                Subtype: {{ stream.subtype }},
+                Filesize: {{ stream.filesize }} MB
+                <a href="{{ stream.url }}" download>Download</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if not video_info %}
+    <p>Or use the <a href="{% url 'ytdownload' %}?url={{ video_url }}">URL</a> parameter</p>
+{% endif %}
+
+</body>
+</html>
